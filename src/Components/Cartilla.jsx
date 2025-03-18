@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Tarjeta from './Tarjeta';
 function Cartilla({ pokemon }) {
     const [isPopupOpen, setPopupOpen] = useState(false);
 
@@ -11,27 +11,50 @@ function Cartilla({ pokemon }) {
         setPopupOpen(false);
     };
 
+    let color;
+    
+    if(pokemon.types.some(type => type.type.name === 'water')){
+        color = "agua";
+    } else if(pokemon.types.some(type => type.type.name === 'electric')){
+        color = "electrico";
+    } else if(pokemon.types.some(type => type.type.name === 'fire')){
+        color = "fuego";
+    } else if(pokemon.types.some(type => type.type.name === 'grass')){
+        color = "planta";
+    }else if(pokemon.types.some(type => type.type.name === 'bug')){
+        color = "bicho";
+    }else if(pokemon.types.some(type => type.type.name === 'normal')){
+        color = "normal";
+    }
+
     return (
-        <div className="estiloCartilla">
-            <div>
-                <img src={pokemon.sprites.front_default} alt={pokemon.name} className='edicionImg' />
-            </div>
-            <section className='paraTextoGlobal'>
-                <h2>{pokemon.name}</h2>
-                <p className='itemDescriptor'>Tipo: {pokemon.types.map((type) => type.type.name).join(', ')}</p>
-                <p className='itemDescriptor'>Número: #{pokemon.id}</p>
-            </section>
-            <button onClick={openPopup} className='peque'>+</button>
-            {isPopupOpen && (
-                <div className="ventana-popup">
-                    <div className="contenido-popup">
-                        <p className='textoPokemon'>{pokemon.name}</p>
-                        <img src={pokemon.sprites.front_default} alt={pokemon.name} className='edicionImgPop' />
-                        <p> </p>
-                        <button onClick={closePopup}>Cerrar</button>
-                    </div>
+        <div className={color}>
+            <div className="estiloCartilla" onClick={openPopup}>
+                <section className='paraTextoGlobal'>
+                    <h2>{pokemon.name}</h2>
+                    <p className='itemDescriptor'>Tipo: {pokemon.types.map((type) => type.type.name).join(', ')}</p>
+                    <p className='itemDescriptor'>Número: #{pokemon.id}</p>
+                </section>
+                <div >
+                <div  className="circulo-transparente"/>
+                <div className='circulito'></div>
+                <img src={pokemon.sprites.front_default} alt={pokemon.name} className="edicionImg" />
+                    
                 </div>
-            )}
+                
+                {isPopupOpen && (
+                    <div className="ventana-popup">
+                        <div className={color}>
+                            <Tarjeta pokemon={pokemon} color={color} />
+                            <button onClick={(event) => { 
+                                closePopup(); 
+                                event.stopPropagation();}}>
+                                    Cerrar
+                                </button>
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
