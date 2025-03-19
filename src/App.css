@@ -1,20 +1,22 @@
-
-
 .estiloCartilla {
   font-family: Arial, Helvetica, sans-serif;
   display: grid;
   grid-template-columns: 1fr 2fr 0.5fr;
   grid-template-rows: auto;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 15px;
   position: relative;
   border-radius: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
+  
 }
 .planta {
   background-color: #40c6a9;
-  border-radius: 10px;
+  border-radius: 20px;
+}
+.edicionTarjeta{
+  height: 540px;
 }
 .fuego{
   background-color: #ff5757;
@@ -46,9 +48,11 @@
 
 .itemDescriptor {
   margin: 5px 0;
-  border-radius: 10px;
+  border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.5); 
   padding: 5px;
+  width: fit-content;
+  padding: 13px;
 }
 
 .peque {
@@ -65,12 +69,10 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   background: rgba(255, 255, 255, 0.5);
-  display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .contenido-popup {
@@ -207,11 +209,331 @@
 
 .contenedorTarjeta{
   padding-left:20px;
-
+  padding-right: 20px;
+  height: 78px;
+  width: 350px;
+  border-radius: 20px;
 
 }
 
-.moverImgTarjeta{
-  top:-20px;
 
+.estilosBarra{
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  size: 18px;
+  position: relative;
+  top: 426px;
+
+}
+
+
+.moverImgTarjeta{
+  position: relative;
+  top:-20px;
+  text-align: center;
+  left: 15%
+}
+
+.botonCerrar{
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  margin-bottom: 8px;
+  position: relative;
+  justify-content: center;
+  
+
+}
+
+.contenido{
+  background-color: white;
+  padding-left: 20px;
+  margin-left:20px;
+  margin-right: 20px;
+  position: relative;
+  height: 250px;
+  top:-60px;
+  border-radius: 20px;
+  padding-top: 20px;
+}
+
+.contenido {
+  line-height: 1;
+  padding-top: 15px;
+  margin: 20px;
+}
+
+.info-row {
+  margin: 10;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+}
+.respuesta{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+  color:#9b9b9b;
+}
+
+
+.tituloSecciones {
+  margin: 0;
+  padding: 5px;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.info-row h4 {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.contenido.stats-container {
+  background-color: #ffffff;
+  padding: 10px;
+  padding-left: 20px;
+  margin: 20px;
+  position: relative;
+  border-radius: 20px;
+  top: -60px;
+  line-height: 1;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.tituloSecciones.stat-name {
+  width: 70px;
+  text-align: left;
+  color: #474747f0;
+  margin: 0;
+  padding: 2px 5px;
+  margin-right: 5px;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.stat-value {
+  width: 30px;
+  text-align: right;
+  margin-right: 15px;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 0;
+}
+
+.stat-bar-container {
+  flex: 1;
+  height: 4px;
+  background: #ffffff;
+  border-radius: 3px;
+}
+
+.stat-bar {
+  height: 100%;
+  border-radius: 3px;
+}
+
+.stat-bar-low {
+  background-color: #FF5959;
+}
+
+.stat-bar-high {
+  background-color: #5AC178;
+}
+
+.total-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.type-defenses-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin: 5px 0 0 10px;
+  color: #000;
+}
+
+.type-defenses-subtitle {
+  color: #474747f0;
+  font-size: 14px;
+  margin: 0 0 5px 10px;
+}
+
+.evolution-title {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+.evolution-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  padding-right: -60px;
+}
+
+.evolution-pokemon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.evolution-pokemon-name {
+  margin: 5px 0;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.evolution-level {
+  display: flex;
+  align-items: center;
+  color: #0077CC;
+  background-color: #E0F0FF;
+  border-radius: 10px;
+  padding: 2px 8px;
+  margin: 5px 0;
+  font-size: 0.8em;
+}
+
+.level-icon {
+  margin-right: 4px;
+}
+
+.evolution-image {
+  width: 100px;
+  height: 100px;
+}
+
+.evolution-arrow {
+  font-size: 1.5em;
+  color: #888;
+}
+
+.moves-title {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+.moves-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.move-item {
+  border-radius: 5px;
+  overflow: hidden;
+  padding-right: 21px;
+}
+
+.move-row {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 5px;
+}
+
+.move-type {
+  padding: 3px 8px;
+  border-radius: 15px;
+  color: white;
+  font-size: 0.8em;
+  margin-right: 10px;
+  text-transform: capitalize;
+}
+
+.normal {
+  background-color: #A8A878;
+}
+
+.fire {
+  background-color: #F08030;
+}
+
+.water {
+  background-color: #6890F0;
+}
+
+.electric {
+  background-color: #F8D030;
+}
+
+.grass {
+  background-color: #78C850;
+}
+
+.ice {
+  background-color: #98D8D8;
+}
+
+.fighting {
+  background-color: #C03028;
+}
+
+.poison {
+  background-color: #A040A0;
+}
+
+.ground {
+  background-color: #E0C068;
+}
+
+.flying {
+  background-color: #A890F0;
+}
+
+.psychic {
+  background-color: #F85888;
+}
+
+.bug {
+  background-color: #A8B820;
+}
+
+.rock {
+  background-color: #B8A038;
+}
+
+.ghost {
+  background-color: #705898;
+}
+
+.dragon {
+  background-color: #7038F8;
+}
+
+.dark {
+  background-color: #705848;
+}
+
+.steel {
+  background-color: #B8B8D0;
+}
+
+.fairy {
+  background-color: #EE99AC;
+}
+
+.move-name {
+  flex-grow: 1
+}
+
+.tituloSeccionesS{
+  color: #929292f0;
 }

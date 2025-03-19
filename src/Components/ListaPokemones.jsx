@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Cartilla from './Cartilla';
 import Individual from './Individual';
