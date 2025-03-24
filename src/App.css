@@ -134,6 +134,7 @@
   .estilosParaLista {
     grid-template-columns: 1fr;
   }
+
 }
 @media (min-width: 1200px) {
   .estilosParaLista {
@@ -152,8 +153,6 @@
   align-items: center;
   z-index: 1000;
 }
-
-
 
 .circulo-transparente {
   width: 100px;
@@ -193,17 +192,26 @@
 @media (min-width: 601px) and (max-width: 900px) {
   .estilosParaLista {
     grid-template-columns: repeat(2, 1fr);
-}
+  }
+  .botonCerrar{
+    left: 45%;
+  }
 }
 @media (min-width: 901px) and (max-width: 1300px) {
   .estilosParaLista {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .botonCerrar{
+    left: 45%;
   }
 }
 
 @media (min-width: 1201px) {
   .estilosParaLista {
     grid-template-columns: repeat(4, 1fr);
+  }
+  .botonCerrar{
+    left: 45%;
   }
 }
 
@@ -215,7 +223,6 @@
   border-radius: 20px;
 
 }
-
 
 .estilosBarra{
   border-radius: 10px;
@@ -236,13 +243,14 @@
 
 .botonCerrar{
   background-color: rgba(255, 255, 255, 0.5);
-  border: none;
+  border-radius: 10px;
+  padding: 10px;
   margin-bottom: 8px;
   position: relative;
-  justify-content: center;
-  
-
+  border-width: 0;
+  text-align: left;
 }
+
 
 .contenido{
   background-color: white;
@@ -254,20 +262,17 @@
   top:-60px;
   border-radius: 20px;
   padding-top: 20px;
-}
-
-.contenido {
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 20px;
   line-height: 1;
-  padding-top: 15px;
-  margin: 20px;
 }
 
 .info-row {
   margin: 10;
-  padding: 10px;
   display: flex;
   align-items: center;
-  padding: 3px;
+  padding-top: 10px;
 }
 .respuesta{
   font-family: Arial, Helvetica, sans-serif;
@@ -282,6 +287,7 @@
   padding: 5px;
   margin-right: 5px;
   display: inline-block;
+  font-size: 15px;
 }
 
 .info-row h4 {
@@ -340,11 +346,11 @@
   border-radius: 3px;
 }
 
-.stat-bar-low {
+.low{
   background-color: #FF5959;
 }
 
-.stat-bar-high {
+.high {
   background-color: #5AC178;
 }
 
@@ -378,8 +384,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 10px;
-  padding-right: -60px;
+  padding-right: 10px;
 }
 
 .evolution-pokemon {
@@ -387,13 +392,16 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  height: 50px;
+  width: 50px;
 }
 
-.evolution-pokemon-name {
+.nombreEvolucion {
   margin: 5px 0;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bold;
   text-transform: capitalize;
+  padding-top: 15px;
 }
 
 .evolution-level {
@@ -416,7 +424,7 @@
   height: 100px;
 }
 
-.evolution-arrow {
+.arrow {
   font-size: 1.5em;
   color: #888;
 }
@@ -440,6 +448,9 @@
   border-radius: 5px;
   overflow: hidden;
   padding-right: 21px;
+  height: 100;
+  text-align: left;
+
 }
 
 .move-row {
@@ -537,3 +548,45 @@
 .tituloSeccionesS{
   color: #929292f0;
 }
+
+.group {
+  display: flex;
+  line-height: 28px;
+  align-items: center;
+  position: relative;
+  max-width: 190px;
+  
+ }
+ 
+ .input {
+  width: 100%;
+  height: 40px;
+  line-height: 28px;
+  padding: 0 1rem;
+  padding-left: 2.5rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  outline: none;
+  background-color: #f3f3f4;
+  color: #0d0c22;
+  transition: .3s ease;
+ }
+ 
+ .input::placeholder {
+  color: #9e9ea7;
+ }
+ 
+ .input:focus, input:hover {
+  outline: none;
+  border-color: rgba(234,76,137,0.4);
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+ }
+ 
+ .icon {
+  position: absolute;
+  left: 1rem;
+  fill: #9e9ea7;
+  width: 1rem;
+  height: 1rem;
+ }

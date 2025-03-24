@@ -1,42 +1,54 @@
 import React from 'react';
-function SeccionEvolution({ pokemon, evolutionChain }) {
-    if (!evolutionChain) {
-        return <div className="contenido">Cargando</div>;
-    }
 
-    const extractEvolutions = (chain) => {
-        const evolutions = [];
-        evolutions.push({
-            name: chain.species.name,
-            url: `https://pokeapi.co/api/v2/pokemon/${chain.species.name}`,
-            evolutionDetails: null
-        });
-        
-        if (chain.evolves_to.length > 0) {
-            chain.evolves_to.forEach(evolution => {
-                const evolutionDetails = evolution.evolution_details[0] || {};
-                evolutions.push({
-                    name: evolution.species.name,
-                    url: `https://pokeapi.co/api/v2/pokemon/${evolution.species.name}`,
-                    evolutionDetails: evolutionDetails
-                });
-                
-                if (evolution.evolves_to.length > 0) {
-                    evolution.evolves_to.forEach(furtherEvolution => {
-                        const furtherDetails = furtherEvolution.evolution_details[0] || {};
-                        evolutions.push({
-                            name: furtherEvolution.species.name,
-                            url: `https://pokeapi.co/api/v2/pokemon/${furtherEvolution.species.name}`,
-                            evolutionDetails: furtherDetails
-                        });
-                    });
-                }
-            });
+function SeccionEvolution({ pokemon, evolutionChain }) {
+    const [evolutions, setEvolutions] = React.useState(null);
+
+    const getPokemonImageUrl = async (pokemonName) => {
+        try {
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+            const data = await response.json();
+            return data.sprites.front_default;
+        } catch (error) {
+            console.error("Error al obtener la imagen del Pokémon:", error);
+            return null;
         }
+    };
+    const extractEvolutions = async (chain) => {
+        const evolutions = [];
+
+        const processEvolution = async (evolutionData) => {
+            const imageUrl = await getPokemonImageUrl(evolutionData.species.name);
+            evolutions.push({
+                name: evolutionData.species.name,
+                url: `https://pokeapi.co/api/v2/pokemon/${evolutionData.species.name}`,
+                evolutionDetails: evolutionData.evolution_details[0] || {},
+                imageUrl: imageUrl,
+            });
+
+            if (evolutionData.evolves_to && evolutionData.evolves_to.length > 0) {
+                for (const nextEvolution of evolutionData.evolves_to) {
+                    await processEvolution(nextEvolution);
+                }
+            }
+        };
+
+        await processEvolution(chain);
         return evolutions;
     };
 
-    const evolutions = extractEvolutions(evolutionChain.chain);
+    React.useEffect(() => {
+        const fetchEvolutions = async () => {
+            if (evolutionChain) {
+                const evoData = await extractEvolutions(evolutionChain.chain);
+                setEvolutions(evoData);
+            }
+        };
+        fetchEvolutions();
+    }, [evolutionChain]);
+
+    if (!evolutions) {
+        return <div className="contenido">Cargando</div>;
+    }
 
     return (
         <div className="contenido">
@@ -45,20 +57,22 @@ function SeccionEvolution({ pokemon, evolutionChain }) {
                 {evolutions.map((evolution, index) => (
                     <React.Fragment key={evolution.name}>
                         <div className="evolution-pokemon">
-                            <h3 className="evolution-pokemon-name">{evolution.name}</h3>
+                            <h3 className="nombreEvolucion">{evolution.name}</h3>
                             {evolution.evolutionDetails && evolution.evolutionDetails.min_level && (
                                 <div className="evolution-level">
                                     <span className="level-icon">↑</span> Level {evolution.evolutionDetails.min_level}
                                 </div>
                             )}
-                            <img
-                                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.url.split('/')[6]}.png`}
-                                alt={evolution.name}
-                                className="evolution-image"
-                            />
+                            {evolution.imageUrl && (
+                                <img
+                                    src={evolution.imageUrl}
+                                    alt={evolution.name}
+                                    className="evolution-image"
+                                />
+                            )}
                         </div>
                         {index < evolutions.length - 1 && (
-                            <div className="evolution-arrow">→</div>
+                            <div className="arrow">→</div>
                         )}
                     </React.Fragment>
                 ))}
