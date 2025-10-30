@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function SeccionEvolution({ pokemon, evolutionChain }) {
     const [evolutions, setEvolutions] = React.useState(null);
@@ -21,11 +22,11 @@ function SeccionEvolution({ pokemon, evolutionChain }) {
             evolutions.push({
                 name: evolutionData.species.name,
                 url: `https://pokeapi.co/api/v2/pokemon/${evolutionData.species.name}`,
-                evolutionDetails: evolutionData.evolution_details[0] || {},
+                evolutionDetails: evolutionData.evolution_details?.[0] || {},
                 imageUrl: imageUrl,
             });
 
-            if (evolutionData.evolves_to && evolutionData.evolves_to.length > 0) {
+            if (evolutionData.evolves_to?.length > 0) {
                 for (const nextEvolution of evolutionData.evolves_to) {
                     await processEvolution(nextEvolution);
                 }
@@ -38,8 +39,9 @@ function SeccionEvolution({ pokemon, evolutionChain }) {
 
     React.useEffect(() => {
         const fetchEvolutions = async () => {
-            if (evolutionChain) {
-                const evoData = await extractEvolutions(evolutionChain.chain);
+            const chain = evolutionChain?.chain || evolutionChain;
+            if (chain) {
+                const evoData = await extractEvolutions(chain);
                 setEvolutions(evoData);
             }
         };
@@ -55,18 +57,18 @@ function SeccionEvolution({ pokemon, evolutionChain }) {
             <h3 className="evolution-title">Evolution Chain</h3>
             <div className="evolution-container">
                 {evolutions.map((evolution, index) => (
-                    <React.Fragment key={evolution.name}>
+                    <React.Fragment key={evolution?.name}>
                         <div className="evolution-pokemon">
-                            <h3 className="nombreEvolucion">{evolution.name}</h3>
-                            {evolution.evolutionDetails && evolution.evolutionDetails.min_level && (
+                            <h3 className="nombreEvolucion">{evolution?.name}</h3>
+                            {evolution.evolutionDetails?.min_level && (
                                 <div className="evolution-level">
-                                    <span className="level-icon">↑</span> Level {evolution.evolutionDetails.min_level}
+                                    <span className="level-icon">↑</span> Level {evolution.evolutionDetails?.min_level}
                                 </div>
                             )}
                             {evolution.imageUrl && (
                                 <img
                                     src={evolution.imageUrl}
-                                    alt={evolution.name}
+                                    alt={evolution?.name}
                                     className="evolution-image"
                                 />
                             )}
@@ -82,3 +84,13 @@ function SeccionEvolution({ pokemon, evolutionChain }) {
 }
 
 export default SeccionEvolution;
+
+SeccionEvolution.propTypes = {
+    pokemon: PropTypes.object,
+    evolutionChain: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+};
+
+SeccionEvolution.defaultProps = {
+    pokemon: null,
+    evolutionChain: null,
+};

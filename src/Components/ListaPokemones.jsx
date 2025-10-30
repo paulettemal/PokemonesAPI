@@ -21,9 +21,7 @@ function ListaPokemones() {
 
         getPokemones();
     }, []);
-    const pasa = () => {
-        <Individual key={pokemon.name} pokemon={pokemon}/>;
-    }
+    
     return (
         <div className='estilosParaLista'>
         {pokemones.map((pokemon) => (
