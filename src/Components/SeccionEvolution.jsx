@@ -83,6 +83,7 @@ function SeccionEvolution({ pokemon, evolutionChain }) {
     );
 }
 
+
 export default SeccionEvolution;
 
 SeccionEvolution.propTypes = {
