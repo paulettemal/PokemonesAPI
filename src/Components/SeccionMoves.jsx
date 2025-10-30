@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function SeccionMoves({ pokemon, movesInfo }) {
     if (!movesInfo || movesInfo.length === 0) {
@@ -43,5 +44,28 @@ function SeccionMoves({ pokemon, movesInfo }) {
         </div>
     );
 }
+
+SeccionMoves.propTypes = {
+    pokemon: PropTypes.object,
+    movesInfo: PropTypes.arrayOf(
+        PropTypes.shape({
+            move: PropTypes.shape({
+                name: PropTypes.string.isRequired,
+            }).isRequired,
+            details: PropTypes.shape({
+                type: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
+                power: PropTypes.number,
+                accuracy: PropTypes.number,
+                pp: PropTypes.number,
+            }).isRequired,
+            learnMethod: PropTypes.string,
+        })
+    ),
+};
+
+SeccionMoves.defaultProps = {
+    pokemon: null,
+    movesInfo: [],
+};
 
 export default SeccionMoves;
