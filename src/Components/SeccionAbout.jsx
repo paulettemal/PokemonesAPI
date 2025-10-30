@@ -13,7 +13,7 @@ function SeccionAbout({ pokemon, especieInfo }) {
     );
 
     const ratioGenero = especieInfo.gender_rate;
-    let generoText = "Unknown";
+
     if (ratioGenero === -1) {
         generoText = "Sin genero";
     } else {
